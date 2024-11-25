@@ -8,12 +8,16 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { MoviesService } from './movies.service';
+import { Movie } from './entities/movies.entity';
 
 @Controller('movies')
 export class MoviesController {
+  constructor(private readonly moviesService: MoviesService) {}
+
   @Get()
-  getAll() {
-    return 'This will return all movies';
+  getAll(): Movie[] {
+    return this.moviesService.getAll();
   }
 
   // @Get에서 '/' 이거 없어도 됨
@@ -23,19 +27,18 @@ export class MoviesController {
   }
 
   @Get('/:id')
-  getOne(@Param('id') movieId: string) {
-    return `This will return one movie with the id: ${movieId}`;
+  getOne(@Param('id') movieId: string): Movie {
+    return this.moviesService.getOne(movieId);
   }
 
   @Post()
   create(@Body() newMovieData) {
-    console.log(newMovieData);
-    return newMovieData;
+    return this.moviesService.create(newMovieData);
   }
 
   @Delete('/:id')
   remove(@Param('id') movieId: string) {
-    return `This will delete a movie with the id: ${movieId}`;
+    return this.moviesService.deleteOne(movieId);
   }
 
   // movie의 일부분만 업데이트할 때는 @Patch 사용
