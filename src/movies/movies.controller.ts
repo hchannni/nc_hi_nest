@@ -11,6 +11,7 @@ import {
 import { MoviesService } from './movies.service';
 import { Movie } from './entities/movies.entity';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/udpate-movie.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -45,7 +46,10 @@ export class MoviesController {
   // movie의 일부분만 업데이트할 때는 @Patch 사용
   // @Put은 전체를 업데이트할 때 사용
   @Patch('/:id')
-  patch(@Param('id') movieId: number, @Body() updatedMovieData) {
+  patch(
+    @Param('id') movieId: number,
+    @Body() updatedMovieData: UpdateMovieDto,
+  ) {
     return {
       updatedMovie: movieId,
       ...updatedMovieData,
