@@ -15,4 +15,10 @@ describe('MoviesService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  // 이런 식으로 테스트 파일 작성!
+  // npm run test:xxx 명령어로 테스트 실행
+  it('should be 4', () => {
+    expect(2 + 2).toEqual(4);
+  });
 });
