@@ -28,7 +28,7 @@ export class MoviesController {
   }
 
   @Get('/:id')
-  getOne(@Param('id') movieId: string): Movie {
+  getOne(@Param('id') movieId: number): Movie {
     return this.moviesService.getOne(movieId);
   }
 
@@ -38,14 +38,14 @@ export class MoviesController {
   }
 
   @Delete('/:id')
-  remove(@Param('id') movieId: string) {
+  remove(@Param('id') movieId: number) {
     return this.moviesService.deleteOne(movieId);
   }
 
   // movie의 일부분만 업데이트할 때는 @Patch 사용
   // @Put은 전체를 업데이트할 때 사용
   @Patch('/:id')
-  patch(@Param('id') movieId: string, @Body() updatedMovieData) {
+  patch(@Param('id') movieId: number, @Body() updatedMovieData) {
     return {
       updatedMovie: movieId,
       ...updatedMovieData,

@@ -10,8 +10,8 @@ export class MoviesService {
     return this.movies;
   }
 
-  getOne(id: string): Movie {
-    const movie = this.movies.find((movie) => movie.id === +id);
+  getOne(id: number): Movie {
+    const movie = this.movies.find((movie) => movie.id === id);
     // 에러를 날리는 것 : NestJS가 이미 우리에게 제공하고 있는 예외 처리이다.
     // HttpException에서 확장된 NestJS에서 제공하는 에러 처리 기능
     if (!movie) {
@@ -20,8 +20,8 @@ export class MoviesService {
     return movie;
   }
 
-  deleteOne(id: string): boolean {
-    this.movies = this.movies.filter((movie) => movie.id !== +id);
+  deleteOne(id: number): boolean {
+    this.movies = this.movies.filter((movie) => movie.id !== id);
     return true;
   }
 
@@ -32,7 +32,7 @@ export class MoviesService {
     });
   }
 
-  update(id: string, updateData) {
+  update(id: number, updateData) {
     const movie = this.getOne(id);
     this.deleteOne(id);
     this.movies.push({ ...movie, ...updateData });
